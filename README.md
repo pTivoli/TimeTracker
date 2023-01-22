@@ -36,3 +36,9 @@ Javadoc is published through GitHub pages, here is the link: https://ptivoli.git
 
 ## Which operating systems are supported by TimeTracker?
 Well, I personally tested this program only in Windows, for Linux and Mac some things may give problems, such as the font used but I'm not sure since I didn't test it yet if you want to test it and share the results with me it would be awesome!
+
+## Special thanks
+A special thanks goes to all the open source project I used and their contributors, their products are gorgeous!
+Here is the list:
+- H2 database: https://github.com/h2database/h2database
+- LGoodDatePicker: https://github.com/LGoodDatePicker/LGoodDatePicker
