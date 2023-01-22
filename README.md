@@ -42,3 +42,6 @@ A special thanks goes to all the open source project I used and their contributo
 Here is the list:
 - H2 database: https://github.com/h2database/h2database
 - LGoodDatePicker: https://github.com/LGoodDatePicker/LGoodDatePicker
+
+## Download
+[TimeTracker.zip](https://github.com/pTivoli/TimeTracker/files/10475113/TimeTracker.zip)
