@@ -10,7 +10,10 @@ controller/Controller$2.class
 com/time/tracker/Main.class
 controller/persistence/PersistenceManager.class
 model/TimeUtils.class
+view/View$ModernButton$1.class
 view/View.class
+view/View$2.class
+view/View$ModernButton.class
 view/package-info.class
 com/time/tracker/package-info.class
 controller/persistence/database/management/package-info.class
@@ -20,5 +23,6 @@ view/ErrorMessage.class
 controller/persistence/package-info.class
 controller/ClockManager.class
 controller/Controller$1.class
+view/View$1.class
 controller/persistence/FileManager.class
 controller/Controller.class
