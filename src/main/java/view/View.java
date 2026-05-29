@@ -25,6 +25,19 @@ import java.util.ResourceBundle;
  */
 public class View {
 
+    private static String resolveFontFamily() {
+        String[] preferredFonts = new String[] {"Inter", "Segoe UI", "SF Pro Text", "SansSerif"};
+        String[] availableFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        for (String preferredFont : preferredFonts) {
+            for (String availableFont : availableFonts) {
+                if (preferredFont.equalsIgnoreCase(availableFont)) {
+                    return availableFont;
+                }
+            }
+        }
+        return "SansSerif";
+    }
+
     private static final String FONT_FAMILY = resolveFontFamily();
     private static final Color BACKGROUND_COLOR = new Color(15, 23, 42);
     private static final Color CARD_COLOR = new Color(30, 41, 59);
@@ -39,6 +52,7 @@ public class View {
     private static final Color ACTION_COLOR = new Color(45, 212, 191);
     private static final Color ACTION_HOVER_COLOR = new Color(20, 184, 166);
     private static final Color DISABLED_COLOR = new Color(71, 85, 105);
+    private static final Color BORDER_COLOR = new Color(71, 85, 105);
 
     private static final Font TITLE_FONT = new Font(FONT_FAMILY, Font.BOLD, 30);
     private static final Font SECTION_FONT = new Font(FONT_FAMILY, Font.BOLD, 18);
@@ -46,6 +60,7 @@ public class View {
     private static final Font SMALL_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
     private static final Font TIMER_FONT = new Font(FONT_FAMILY, Font.BOLD, 54);
     private static final Font WELCOME_FONT = new Font(FONT_FAMILY, Font.BOLD, 52);
+    private static final int BUTTON_BORDER_RADIUS = 18;
 
     private final JFrame frame;
     private JButton start;
@@ -126,7 +141,7 @@ public class View {
         taskDescription.setBackground(SURFACE_COLOR);
         taskDescription.setMargin(new Insets(18, 18, 18, 18));
         taskDescription.setBorder(new CompoundBorder(
-                new LineBorder(new Color(71, 85, 105), 1, true),
+                new LineBorder(BORDER_COLOR, 1, true),
                 new EmptyBorder(8, 8, 8, 8)
         ));
 
@@ -526,7 +541,7 @@ public class View {
         JPanel panel = new JPanel(new BorderLayout(0, 18));
         panel.setBackground(CARD_COLOR);
         panel.setBorder(new CompoundBorder(
-                new LineBorder(new Color(71, 85, 105), 1, true),
+                new LineBorder(BORDER_COLOR, 1, true),
                 new EmptyBorder(20, 20, 20, 20)
         ));
 
@@ -541,7 +556,7 @@ public class View {
         JPanel chip = new JPanel(new BorderLayout());
         chip.setBackground(CARD_COLOR);
         chip.setBorder(new CompoundBorder(
-                new LineBorder(new Color(71, 85, 105), 1, true),
+                new LineBorder(BORDER_COLOR, 1, true),
                 new EmptyBorder(10, 16, 10, 16)
         ));
         label.setForeground(TEXT_PRIMARY);
@@ -565,7 +580,7 @@ public class View {
     }
 
     private void styleScrollPane(JScrollPane scrollPane) {
-        scrollPane.setBorder(new LineBorder(new Color(71, 85, 105), 1, true));
+        scrollPane.setBorder(new LineBorder(BORDER_COLOR, 1, true));
         scrollPane.getViewport().setBackground(SURFACE_COLOR);
         scrollPane.setBackground(SURFACE_COLOR);
     }
@@ -630,7 +645,7 @@ public class View {
             textField.setCaretColor(TEXT_PRIMARY);
             textField.setBackground(SURFACE_COLOR);
             textField.setBorder(new CompoundBorder(
-                    new LineBorder(new Color(71, 85, 105), 1, true),
+                    new LineBorder(BORDER_COLOR, 1, true),
                     new EmptyBorder(6, 10, 6, 10)
             ));
         }
@@ -640,7 +655,7 @@ public class View {
             button.setForeground(TEXT_PRIMARY);
             button.setBackground(SURFACE_ALT_COLOR);
             button.setBorder(new CompoundBorder(
-                    new LineBorder(new Color(71, 85, 105), 1, true),
+                    new LineBorder(BORDER_COLOR, 1, true),
                     new EmptyBorder(6, 10, 6, 10)
             ));
             button.setFocusPainted(false);
@@ -650,19 +665,6 @@ public class View {
                 styleComponentTree(child);
             }
         }
-    }
-
-    private static String resolveFontFamily() {
-        String[] preferredFonts = new String[] {"Inter", "Segoe UI", "SF Pro Text", "SansSerif"};
-        String[] availableFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for (String preferredFont : preferredFonts) {
-            for (String availableFont : availableFonts) {
-                if (preferredFont.equalsIgnoreCase(availableFont)) {
-                    return availableFont;
-                }
-            }
-        }
-        return "SansSerif";
     }
 
     private static class ModernButton extends JButton {
@@ -703,7 +705,7 @@ public class View {
             Graphics2D graphics2D = (Graphics2D) graphics.create();
             graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics2D.setColor(isEnabled() ? (hovered ? hoverColor : backgroundColor) : DISABLED_COLOR);
-            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 18, 18);
+            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), BUTTON_BORDER_RADIUS, BUTTON_BORDER_RADIUS);
             graphics2D.dispose();
             super.paintComponent(graphics);
         }
