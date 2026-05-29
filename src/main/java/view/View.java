@@ -53,6 +53,7 @@ public class View {
     private static final Color ACTION_HOVER_COLOR = new Color(20, 184, 166);
     private static final Color DISABLED_COLOR = new Color(71, 85, 105);
     private static final Color BORDER_COLOR = new Color(71, 85, 105);
+    private static final Color TABLE_SELECTION_COLOR = new Color(14, 116, 144);
 
     private static final Font TITLE_FONT = new Font(FONT_FAMILY, Font.BOLD, 30);
     private static final Font SECTION_FONT = new Font(FONT_FAMILY, Font.BOLD, 18);
@@ -61,6 +62,7 @@ public class View {
     private static final Font TIMER_FONT = new Font(FONT_FAMILY, Font.BOLD, 54);
     private static final Font WELCOME_FONT = new Font(FONT_FAMILY, Font.BOLD, 52);
     private static final int BUTTON_ARC_SIZE = 18;
+    private static final int WELCOME_MESSAGE_DURATION_MS = 1200;
 
     private final JFrame frame;
     private JButton start;
@@ -530,7 +532,7 @@ public class View {
         welcomeMessage.setLocationRelativeTo(null);
         welcomeMessage.setVisible(true);
 
-        Timer timer = new Timer(1200, actionEvent -> welcomeMessage.dispose());
+        Timer timer = new Timer(WELCOME_MESSAGE_DURATION_MS, actionEvent -> welcomeMessage.dispose());
         timer.setRepeats(false);
         timer.start();
     }
@@ -587,7 +589,7 @@ public class View {
         table.setFont(BODY_FONT);
         table.setForeground(TEXT_PRIMARY);
         table.setBackground(SURFACE_COLOR);
-        table.setSelectionBackground(new Color(14, 116, 144));
+        table.setSelectionBackground(TABLE_SELECTION_COLOR);
         table.setSelectionForeground(TEXT_PRIMARY);
         table.setRowHeight(38);
         table.setShowGrid(false);
@@ -614,13 +616,17 @@ public class View {
                     label.setBackground(currentTable.getSelectionBackground());
                     label.setForeground(currentTable.getSelectionForeground());
                 } else {
-                    label.setBackground(row % 2 == 0 ? SURFACE_COLOR : SURFACE_ALT_COLOR);
+                    label.setBackground(isEvenRow(row) ? SURFACE_COLOR : SURFACE_ALT_COLOR);
                     label.setForeground(TEXT_PRIMARY);
                 }
                 return label;
             }
         };
         table.setDefaultRenderer(Object.class, renderer);
+    }
+
+    private boolean isEvenRow(int row) {
+        return row % 2 == 0;
     }
 
     private void styleDateTimePicker(DateTimePicker dateTimePicker) {
