@@ -60,7 +60,7 @@ public class View {
     private static final Font SMALL_FONT = new Font(FONT_FAMILY, Font.PLAIN, 14);
     private static final Font TIMER_FONT = new Font(FONT_FAMILY, Font.BOLD, 54);
     private static final Font WELCOME_FONT = new Font(FONT_FAMILY, Font.BOLD, 52);
-    private static final int BUTTON_BORDER_RADIUS = 18;
+    private static final int BUTTON_ARC_SIZE = 18;
 
     private final JFrame frame;
     private JButton start;
@@ -511,7 +511,7 @@ public class View {
      * This is the method that displays a welcome message to the user.
      */
     public void welcomeMessage() {
-        JWindow welcomeMessage = new JWindow();
+        final JWindow welcomeMessage = new JWindow();
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(CARD_COLOR);
         panel.setBorder(new CompoundBorder(
@@ -529,12 +529,10 @@ public class View {
         welcomeMessage.pack();
         welcomeMessage.setLocationRelativeTo(null);
         welcomeMessage.setVisible(true);
-        try {
-            Thread.sleep(1200);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        welcomeMessage.dispose();
+
+        Timer timer = new Timer(1200, actionEvent -> welcomeMessage.dispose());
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private JPanel createCardPanel(String title) {
@@ -705,7 +703,7 @@ public class View {
             Graphics2D graphics2D = (Graphics2D) graphics.create();
             graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics2D.setColor(isEnabled() ? (hovered ? hoverColor : backgroundColor) : DISABLED_COLOR);
-            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), BUTTON_BORDER_RADIUS, BUTTON_BORDER_RADIUS);
+            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), BUTTON_ARC_SIZE, BUTTON_ARC_SIZE);
             graphics2D.dispose();
             super.paintComponent(graphics);
         }
